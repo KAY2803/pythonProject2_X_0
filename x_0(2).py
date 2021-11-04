@@ -17,7 +17,7 @@ def player_x():
                 continue
             else:
                 field[x - 1] = 'X' # Меняем в игровом поле введенное значение на "Х"
-                print(field)
+                print(f"{field[:3]}\n{field[3:6]},\n{field[6:]})")
         except ValueError: # исключаем ошибку введения не int
             print('Ячейка не существует. Выберите от 1 до 9')
             continue
@@ -41,7 +41,7 @@ def player_0():
                 continue
             else:
                 field[o - 1] = 'O' # Меняем в игровом поле введенное значение на "O"
-                print(field)
+                print(f"{field[:3]}\n{field[3:6]},\n{field[6:]})")
         except ValueError: # исключаем ошибку введения не int
             print('Ячейка не существует. Выберите от 1 до 9')
             continue
