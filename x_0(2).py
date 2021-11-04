@@ -1,55 +1,58 @@
+# Игра "Крестики - Нолики"
+# Дано игровое поле 3 х 3 (всего 9 ячеек)
 field = [1, 2, 3,
          4, 5, 6,
          7, 8, 9]
 
+# Функция для принятия значений игрока "Х"
 def player_x():
     while True:
         try:
             x = int(input('Выберите ячейку для "x" от 1 до 9:'))
-            if x not in range(1, 10):
+            if x not in range(1, 10): # Проверяем, входит ли введенное значение в диапазон ячеек игрового поля
                 print('Ячейка не существует. Введите другое число от 1 до 9')
                 continue
-            if field[x - 1] == 'X' or field[x - 1] == 'O':
+            if field[x - 1] == 'X' or field[x - 1] == 'O': # Проверяем, свободна ли выбранная ячейка
                 print('Ячейка занята. Введите другое число от 1 до 9')
                 continue
             else:
-                field[x - 1] = 'X'
+                field[x - 1] = 'X' # Меняем в игровом поле введенное значение на "Х"
                 print(field)
-        except ValueError:
+        except ValueError: # исключаем ошибку введения не int
             print('Ячейка не существует. Выберите от 1 до 9')
             continue
-        if checking() == 'Переход хода':
+        if checking() == 'Переход хода': # вызываем функцию проверки результатов и останавливаем цикл while
             break
         else:
             print(checking())
             break
     return checking()
 
-
+# Функция для принятия значений игрока "O"
 def player_0():
     while True:
         try:
             o = int(input('Выберите ячейку для "O" от 1 до 9:'))
-            if o not in range(1, 10):
+            if o not in range(1, 10): # Проверяем, входит ли введенное значение в диапазон ячеек игрового поля
                 print('Ячейка не существует. Введите другое число от 1 до 9')
                 continue
-            if field[o - 1] == 'X' or field[o - 1] == 'O':
+            if field[o - 1] == 'X' or field[o - 1] == 'O': # Проверяем, свободна ли выбранная ячейка
                 print('Ячейка занята. Введите другое число от 1 до 9')
                 continue
             else:
-                field[o - 1] = 'O'
+                field[o - 1] = 'O' # Меняем в игровом поле введенное значение на "O"
                 print(field)
-        except ValueError:
+        except ValueError: # исключаем ошибку введения не int
             print('Ячейка не существует. Выберите от 1 до 9')
             continue
-        if checking() == 'Переход хода':
+        if checking() == 'Переход хода':  # вызываем функцию проверки результатов и останавливаем цикл while
             break
         else:
             print(checking())
             break
     return checking()
 
-
+# Функция проверки результатов: проверяет на наличие возможных выигрышных комбинаций
 def checking():
     if field[::3] == ['X'] * 3 or field[1::3] == ['X'] * 3 or field[2::3] == ['X'] * 3 or field[::4] == ['X'] * 3:
         return 'Игра окончена. Выиграл Х'
@@ -62,9 +65,10 @@ def checking():
     else:
         return 'Переход хода'
 
+# Цикл игры
 while True:
-    if player_x() == 'Переход хода':
-        if player_0() == 'Переход хода':
+    if player_x() == 'Переход хода': # с помощью функции вводим "Х"
+        if player_0() == 'Переход хода': # с помощью функции вводим "O"
             continue
         else:
             break
