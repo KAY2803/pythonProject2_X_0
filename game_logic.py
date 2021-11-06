@@ -3,6 +3,7 @@
 
 field = list(range(1, 10))
 
+# Функция для визуализации игрового поля
 def game_field():
     game_field = ''
     for row in field[0:3]:

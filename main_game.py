@@ -1,13 +1,14 @@
 # Реализован процесс игры
 
-import game_logic
+import game_logic # импортируем функции из модуля game_logic
 
-game_logic.game_field()
+game_logic.game_field() # рисуем игровое поле
 
 while True:
-    game_logic.player_x()
-    if game_logic.checking() == 'Переход хода':
-        game_logic.player_0()
+    game_logic.player_x() # вызываем функцию для совершения хода игрока "Х"
+    if game_logic.checking() == 'Переход хода': # вызываем функцию для проверки выигрышных комбинаций и свободных ячеек
+        game_logic.player_0() # вызываем функцию для совершения хода игрока "O"
+        # вызываем функцию для проверки выигрышных комбинаций и свободных ячеек
         if game_logic.checking() == 'Переход хода':
             continue
         else:
