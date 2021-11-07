@@ -14,52 +14,38 @@ def game_field():
     return game_field
 print(game_field())
 
-# Функция для принятия значений игрока "Х" и добавление его в игровое поле
-def player_x():
+# Функция для принятия значений "Х" и "0"
+movings = 1
+def moving_player():
     global field
+    global movings
     while True:
         try:
-            x = int(input('Выберите ячейку для "x" от 1 до 9:'))
-            if x not in range(1, 10): # Проверяем, входит ли введенное значение в диапазон ячеек игрового поля
+            if movings % 2 != 0:
+                moving = int(input('Выберите ячейку для "x" от 1 до 9:'))
+            else:
+                moving = int(input('Выберите ячейку для "o" от 1 до 9:'))
+            if moving not in range(1, 10):  # Проверяем, входит ли введенное значение в диапазон ячеек игрового поля
                 print('Ячейка не существует. Введите другое число от 1 до 9')
                 continue
-            if field[x - 1] == 'X' or field[x - 1] == 'O': # Проверяем, свободна ли выбранная ячейка
+            if field[moving - 1] == 'X' or field[moving - 1] == 'O':  # Проверяем, свободна ли выбранная ячейка
                 print('Ячейка занята. Введите другое число от 1 до 9')
                 continue
-            else:
-                field[x - 1] = 'X' # Меняем в игровом поле введенное значение на "Х"
-                print(f"{' '.join(map(str, field[:3])).rjust(3)}\n{' '.join(map(str, field[3:6])).rjust(3)}\n"
-                      f"{' '.join(map(str, field[6:])).rjust(3)}")
-        except ValueError: # исключаем ошибку введения не int
+        except ValueError:  # исключаем ошибку введения не int
             print('Ячейка не существует. Выберите от 1 до 9')
             continue
-        if x in range(1, 10):
+        if movings % 2 != 0:
+            field[moving - 1] = 'X'
+        else:
+            field[moving - 1] = 'O'
+        print(f"{' '.join(map(str, field[:3])).rjust(3)}\n{' '.join(map(str, field[3:6])).rjust(3)}\n"
+              f"{' '.join(map(str, field[6:])).rjust(3)}")
+        movings += 1
+        if moving in range(1, 11):
             break
         else:
             break
-    return x
-
-# Функция для принятия значений игрока "O" и добавления его в игровое поле
-def player_0():
-    while True:
-        try:
-            o = int(input('Выберите ячейку для "O" от 1 до 9:'))
-            if o not in range(1, 10): # Проверяем, входит ли введенное значение в диапазон ячеек игрового поля
-                print('Ячейка не существует. Введите другое число от 1 до 9')
-                continue
-            if field[o - 1] == 'X' or field[o - 1] == 'O': # Проверяем, свободна ли выбранная ячейка
-                print('Ячейка занята. Введите другое число от 1 до 9')
-                continue
-            else:
-                field[o - 1] = 'O' # Меняем в игровом поле введенное значение на "O"
-                print(f"{' '.join(map(str, field[:3])).rjust(3)}\n{' '.join(map(str, field[3:6])).rjust(3)}\n"
-                      f"{' '.join(map(str, field[6:])).rjust(3)}")
-        except ValueError: # исключаем ошибку введения не int
-            print('Ячейка не существует. Выберите от 1 до 9')
-            continue
-        if o in range(1, 10):
-            break
-    return o
+    return movings
 
 # Функция проверки результатов: проверяет на наличие выигрышных комбинаций и свободных ячеек
 def checking():
@@ -82,4 +68,3 @@ def checking():
     else:
         print('Переход хода')
         return 'Переход хода'
-
